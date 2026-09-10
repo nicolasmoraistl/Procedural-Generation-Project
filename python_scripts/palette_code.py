@@ -10,7 +10,7 @@ class RGB(Palette):
         that will be represented by the variables r, g, b.
         """
 
-        if 255 < r < 0 or 255 < g < 0 or 255 < b < 0:
+        if 255 < r or r < 0 or 255 < g or g < 0 or 255 < b or b < 0:
             raise ValueError
 
         self.r = r
@@ -30,6 +30,8 @@ class Colorset(Palette):
         if filename:
             with open(filename, 'r') as content:
                 for hex in content:
+                    if not hex:
+                        continue
                     hex = hex.strip().lstrip('#')
                     rgb = tuple(int(hex[i:i+2], 16) for i in (0, 2, 4))
                     self.colorset.append(RGB(rgb[0], rgb[1], rgb[2]))
