@@ -19,7 +19,7 @@ class RGB(Palette):
 
 class Colorset(Palette):
 
-    def create_empty_colorset(self):
+    def __init__(self, filename = None):
 
         """
         It will kickstart the constructor by putting in place an empty colorset configuration
@@ -27,17 +27,13 @@ class Colorset(Palette):
 
         self.colorset = []
 
-    def create_palette_by_archive(self, file):
+        if filename:
+            with open(filename, 'r') as content:
+                for hex in content:
+                    hex = hex.strip().lstrip('#')
+                    rgb = tuple(int(hex[i:i+2], 16) for i in (0, 2, 4))
+                    self.colorset.append(RGB(rgb[0], rgb[1], rgb[2]))
 
-        content = open(file, 'r')
-
-        readable_content = content.read()
-
-        for hex in readable_content:
-            print(hex)
-            self.colorset.append(hex)
-
-        content.close()
 
     def add_color_to_colosert(self, color):
 
