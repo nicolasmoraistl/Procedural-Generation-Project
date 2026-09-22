@@ -37,9 +37,6 @@ class Image(object):
                     color = RGB(pixels[idx], pixels[idx+1], pixels[idx+2])
                     self.define_pixel_color(y, x, color)
                     idx += 3
-
-
-            
             
 
     def save_ppm_image(self, path:str):
