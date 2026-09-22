@@ -1,6 +1,3 @@
-class Palette:
-    pass
-
 class RGB:
 
     def __init__(self, r, g, b):
@@ -26,26 +23,18 @@ class Colorset:
         """
 
         self.colorset = []
-
+        if filename:
+            with open(filename, 'r') as content:
+                for hexa in content:
+                    hexa.strip().lstrip('#')
+                    if not hexa:
+                        continue
+                    hexa = hexa.strip().lstrip('#')
+                    rgb = tuple(int(hexa[i:i+2], 16) for i in (0, 2, 4))
+                    self.colorset.append(RGB(rgb[0], rgb[1], rgb[2]))
         
 
-
-    def read_palette(self, filename=None):
-        """
-        This function was designed to read an archive containing colors codes in a hexadecimal format. 
-        Then it will read and transform it in a rgb scale.
-        """
-        if filename:
-
-            with open(filename, 'r') as content:
-                for hex in content:
-                    if not hex:
-                        continue
-                    hex = hex.strip().lstrip('#')
-                    rgb = tuple(int(hex[i:i+2], 16) for i in (0, 2, 4))
-                    self.colorset.append(RGB(rgb[0], rgb[1], rgb[2]))
-
-    def add_color_to_colosert(self, color:RGB):
+    def add_color_to_colorset(self, color:RGB):
 
         self.colorset.append(color)
 
@@ -53,6 +42,6 @@ class Colorset:
 
         return len(self.colorset)
 
-    def check_color_by_index(self, index):
+    def check_color_by_index(self, index) -> RGB:
 
         return self.colorset[index]
