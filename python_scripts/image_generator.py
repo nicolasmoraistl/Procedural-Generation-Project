@@ -1,5 +1,6 @@
 from palette_code import RGB
 
+
 class Image(object):
 
     def __init__(self, lenght, height):
@@ -25,18 +26,44 @@ class Image(object):
 
     def open_ppm_file(self, ppm_file):
 
+
+
         with open(ppm_file, 'r') as read_archive:
             content = read_archive.read()
             tolken = content.split()
             l = int(tolken[1])
             h = int(tolken[2])
             pixels = [int(data) for data in tolken[4:]]
-            idx = 0
-            for y in range(h):
-                for x in range(l):
-                    color = RGB(pixels[idx], pixels[idx+1], pixels[idx+2])
-                    self.define_pixel_color(y, x, color)
-                    idx += 3
+            
+        idx = 0
+        pixel_arq = []
+        # Constructing image pixel matrix
+        for y in range(h):
+            row = []
+            for x in range(l):
+                color = RGB(pixels[idx], pixels[idx+1], pixels[idx+2])
+                row.append(color)
+                idx += 3
+            pixel_arq.append(row)
+
+
+        if h == self.height and l == self.lenght:
+            self.pixel_matrix = pixel_arq
+        else:
+            ratio_height = h / self.height
+            ratio_lenght = l / self.lenght
+
+            for i in range(self.height):
+                for j in range(self.lenght):
+                    y = int(i * ratio_height)
+                    x = int(j * ratio_lenght)
+                    color = pixel_arq[y][x]
+                    self.define_pixel_color(i, j, color)
+
+
+
+
+            
             
 
     def save_ppm_image(self, path:str):

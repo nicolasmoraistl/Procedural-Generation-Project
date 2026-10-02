@@ -36,6 +36,18 @@ for row in range(flag.height):
 
 flag.save_ppm_image('python_scripts/flags/netherlands.ppm')
 
+for row in range(flag.height):
+    for column in range(flag.lenght):
+        if row < 68:
+            flag.define_pixel_color(row, column, palette_code.RGB(0, 0, 0))
+        elif row > 67 and row < 134:
+            flag.define_pixel_color(row, column, palette_code.RGB(208, 0, 0))
+        else:
+            flag.define_pixel_color(row, column, palette_code.RGB(255, 206, 0))
+
+flag.save_ppm_image('python_scripts/flags/germany.ppm')
+
+
 
 
 
