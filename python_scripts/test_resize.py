@@ -1,6 +1,6 @@
 import image_generator
 
-flag = image_generator.Image(600, 400)
+flag = image_generator.Image(60, 40)
 
 flag.open_ppm_file('python_scripts/flags/netherlands.ppm')
 

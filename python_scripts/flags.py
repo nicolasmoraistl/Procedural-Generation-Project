@@ -47,6 +47,33 @@ for row in range(flag.height):
 
 flag.save_ppm_image('python_scripts/flags/germany.ppm')
 
+for row in range(flag.height):
+    for column in range(flag.lenght):
+        if (row - flag.height/2)**2 + 50 + (column - flag.lenght/2)**2 < 3600:
+            flag.define_pixel_color(row, column, palette_code.RGB(208, 0, 0))
+        else:
+            flag.define_pixel_color(row, column, palette_code.RGB(255, 255, 255))
+
+flag.save_ppm_image('python_scripts/flags/japan.ppm')
+
+for row in range(flag.height):
+    for column in range(flag.lenght):
+        if (row - flag.height/2)**2 + 50 + (column - flag.lenght/2)**2 < 2000:
+            flag.define_pixel_color(row, column, palette_code.RGB(0, 39, 118))
+        elif abs(column - flag.lenght/2)/100 + abs(row - flag.height/2)/75 <= 1:
+            flag.define_pixel_color(row, column, palette_code.RGB(255, 223, 0))
+        else:
+            flag.define_pixel_color(row, column, palette_code.RGB(0, 156, 59))
+
+flag.save_ppm_image('python_scripts/flags/brazil.ppm')
+
+flag = image_generator.Image(300, 200)
+
+for x in range(flag.lenght):
+    y = 2 * x + 1
+    flag.define_pixel_color(y, x, palette_code.RGB(255, 255, 255))
+
+flag.save_ppm_image('python_scripts/flags/function.ppm')
 
 
 
