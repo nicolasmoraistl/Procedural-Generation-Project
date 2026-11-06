@@ -69,12 +69,6 @@ flag.save_ppm_image('python_scripts/flags/brazil.ppm')
 
 flag = image_generator.Image(300, 200)
 
-for x in range(flag.lenght):
-    y = 2 * x + 1
-    flag.define_pixel_color(y, x, palette_code.RGB(255, 255, 255))
-
-flag.save_ppm_image('python_scripts/flags/function.ppm')
-
 
 
 
