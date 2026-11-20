@@ -1,5 +1,7 @@
 from random import randint, uniform
-
+from palette_code import Colorset
+from image_generator import Image
+from palette_code import RGB
 class Terrain(object):
 
     def __init__(self, size:int, roughness:float):
@@ -56,6 +58,31 @@ class Terrain(object):
             amplitude *= self.roughness
             step //= 2
 
+    def sunlight(self, alt_image:Image, index): 
+
+        for row in range(self.N):
+            for col in range(self.N):
+
+                if row - 1 > 0 or col - 1 > 0:
+                    if self.matrix[row-1][col-1] > self.matrix[row][col]:
+                        r_dark = int(alt_image.inspect_pixel_coordinate(row, col).r * index)
+                        g_dark = int(alt_image.inspect_pixel_coordinate(row, col).g * index)
+                        b_dark = int(alt_image.inspect_pixel_coordinate(row, col).b * index)
+                        alt_image.define_pixel_color(row, col, RGB(r_dark, b_dark, g_dark))
+
+
+    def generate_map(self, path_palette:str) -> Image:
+
+        palette = Colorset(path_palette)
+
+        alt_map = Image(self.N, self.N)
+
+        for height in range(self.N):
+            for lenght in range(self.N):
+                self.matrix[height][lenght]
+
+
+
 
     def check_altitude(self, row, col):
         return self.matrix[row][col]
@@ -106,19 +133,3 @@ class Terrain(object):
                 for col in len(row):
                     self.matrix[row][col] = new_matrix[i]
                     i += 1
-
-
-
-
-        
-
-
-                
-
-
-                            
-
-    
-
-
-
